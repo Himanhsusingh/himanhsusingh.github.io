@@ -1,20 +1,21 @@
-// ================================
+// ========================================
 // HIMANSHU AI LAB
-// ================================
+// ========================================
 
-// PUT YOUR GOOGLE APPS SCRIPT URL HERE
-const AI_BACKEND_URL = "https://script.google.com/macros/s/AKfycbzMGnfsllrFvgwILWylB63tBbY4Cr2516Itt58ct-u0kJhUb1XgRC_5puOSNx2wajfB/exec";
+const AI_BACKEND_URL =
+    "https://script.google.com/macros/s/AKfycbzMGnfsllrFvgwILWylB63tBbY4Cr2516Itt58ct-u0kJhUb1XgRC_5puOSNx2wajfB/exec";
 
 
-// Get elements from ai-lab.html
+// Get elements from the AI Lab page
 const form = document.getElementById("form");
 const promptBox = document.getElementById("prompt");
 const chatBox = document.getElementById("box");
 
 
-// --------------------------------
+// ========================================
 // Add message to chat
-// --------------------------------
+// ========================================
+
 function addMessage(type, message) {
 
     const msg = document.createElement("div");
@@ -25,31 +26,41 @@ function addMessage(type, message) {
         msg.classList.add("user");
     }
 
+
     const name = document.createElement("b");
 
-    name.textContent = type === "user" ? "YOU" : "AI";
+    name.textContent =
+        type === "user" ? "YOU" : "AI";
+
 
     const text = document.createElement("p");
 
     text.textContent = message;
 
+
     msg.appendChild(name);
     msg.appendChild(text);
 
+
     chatBox.appendChild(msg);
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+
+    chatBox.scrollTop =
+        chatBox.scrollHeight;
+
 
     return msg;
 }
 
 
-// --------------------------------
+// ========================================
 // Ask AI
-// --------------------------------
+// ========================================
+
 async function askAI(question) {
 
     question = question.trim();
+
 
     if (!question) {
         return;
@@ -61,85 +72,98 @@ async function askAI(question) {
 
 
     // Show loading message
-    const loading = addMessage("ai", "Thinking...");
+    const loadingMessage =
+        addMessage("ai", "Thinking...");
 
 
     // Disable input
     promptBox.disabled = true;
 
 
-    const submitButton = form.querySelector("button");
+    const sendButton =
+        form.querySelector("button");
 
-    if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Thinking...";
+
+    if (sendButton) {
+
+        sendButton.disabled = true;
+
+        sendButton.textContent =
+            "Thinking...";
+
     }
 
 
     try {
 
-        const response = await fetch(AI_BACKEND_URL, {
+        // Send question to Apps Script
+        const response = await fetch(
+            AI_BACKEND_URL,
+            {
+                method: "POST",
 
-            method: "POST",
-
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-
-            body: JSON.stringify({
-                prompt: question
-            })
-
-        });
+                body: JSON.stringify({
+                    prompt: question
+                })
+            }
+        );
 
 
-        // Check server response
-        if (!response.ok) {
-
-            throw new Error(
-                "Server error: " + response.status
-            );
-
-        }
+        // Read server response
+        const data =
+            await response.json();
 
 
-        const data = await response.json();
+        console.log(
+            "AI backend response:",
+            data
+        );
 
 
-        // Check AI response
+        // Check response
         if (!data.success) {
 
             throw new Error(
-                data.error || "AI request failed"
+                data.error ||
+                "AI request failed."
             );
 
         }
 
 
-        // Replace "Thinking..." with AI answer
-        loading.querySelector("p").textContent =
+        // Show AI answer
+        loadingMessage
+            .querySelector("p")
+            .textContent =
             data.answer;
 
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "AI ERROR:",
+            error
+        );
 
-        loading.querySelector("p").textContent =
+
+        loadingMessage
+            .querySelector("p")
+            .textContent =
             "Sorry, I could not connect to the AI. Please try again.";
 
     }
 
 
-    // Enable input again
+    // Enable input
     promptBox.disabled = false;
 
 
-    if (submitButton) {
+    if (sendButton) {
 
-        submitButton.disabled = false;
+        sendButton.disabled = false;
 
-        submitButton.textContent = "Ask Gemini ✦";
+        sendButton.textContent =
+            "Ask Gemini ✦";
 
     }
 
@@ -149,62 +173,84 @@ async function askAI(question) {
 }
 
 
-// --------------------------------
+// ========================================
 // Form submit
-// --------------------------------
-form.addEventListener("submit", function(event) {
+// ========================================
 
-    event.preventDefault();
-
-    const question = promptBox.value;
-
-    promptBox.value = "";
-
-    askAI(question);
-
-});
-
-
-// --------------------------------
-// Quick buttons
-// --------------------------------
-const quickButtons =
-    document.querySelectorAll(".quick button");
-
-
-quickButtons.forEach(function(button) {
-
-    button.addEventListener("click", function() {
-
-        const question =
-            button.getAttribute("data-q");
-
-        promptBox.value = question;
-
-        askAI(question);
-
-    });
-
-});
-
-
-// --------------------------------
-// Enter key
-// --------------------------------
-promptBox.addEventListener("keydown", function(event) {
-
-    // Enter = send
-    // Shift + Enter = new line
-
-    if (
-        event.key === "Enter" &&
-        !event.shiftKey
-    ) {
+form.addEventListener(
+    "submit",
+    function(event) {
 
         event.preventDefault();
 
-        form.requestSubmit();
+
+        const question =
+            promptBox.value;
+
+
+        promptBox.value = "";
+
+
+        askAI(question);
 
     }
+);
 
-});
+
+// ========================================
+// Quick question buttons
+// ========================================
+
+const quickButtons =
+    document.querySelectorAll(
+        ".quick button"
+    );
+
+
+quickButtons.forEach(
+    function(button) {
+
+        button.addEventListener(
+            "click",
+            function() {
+
+                const question =
+                    button.getAttribute(
+                        "data-q"
+                    );
+
+
+                promptBox.value =
+                    question;
+
+
+                askAI(question);
+
+            }
+        );
+
+    }
+);
+
+
+// ========================================
+// Enter key
+// ========================================
+
+promptBox.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
+
+            event.preventDefault();
+
+            form.requestSubmit();
+
+        }
+
+    }
+);

@@ -2,43 +2,69 @@
 // HIMANSHU AI LAB
 // ========================================
 
+
 const AI_BACKEND_URL =
     "https://script.google.com/macros/s/AKfycbzMGnfsllrFvgwILWylB63tBbY4Cr2516Itt58ct-u0kJhUb1XgRC_5puOSNx2wajfB/exec";
 
 
-// Get elements from the AI Lab page
-const form = document.getElementById("form");
-const promptBox = document.getElementById("prompt");
-const chatBox = document.getElementById("box");
+// ========================================
+// Get HTML elements
+// ========================================
+
+const form =
+    document.getElementById("form");
+
+const promptBox =
+    document.getElementById("prompt");
+
+const chatBox =
+    document.getElementById("box");
 
 
 // ========================================
-// Add message to chat
+// Add message
 // ========================================
 
-function addMessage(type, message) {
+function addMessage(
+    type,
+    message
+) {
 
-    const msg = document.createElement("div");
+    const msg =
+        document.createElement("div");
 
-    msg.className = "msg";
+
+    msg.className =
+        "msg";
+
 
     if (type === "user") {
+
         msg.classList.add("user");
+
     }
 
 
-    const name = document.createElement("b");
+    const name =
+        document.createElement("b");
+
 
     name.textContent =
-        type === "user" ? "YOU" : "AI";
+        type === "user"
+            ? "YOU"
+            : "AI";
 
 
-    const text = document.createElement("p");
+    const text =
+        document.createElement("p");
 
-    text.textContent = message;
+
+    text.textContent =
+        message;
 
 
     msg.appendChild(name);
+
     msg.appendChild(text);
 
 
@@ -50,125 +76,212 @@ function addMessage(type, message) {
 
 
     return msg;
+
 }
 
 
 // ========================================
-// Ask AI
+// Ask AI using JSONP
 // ========================================
 
-async function askAI(question) {
+function askAI(question) {
 
-    question = question.trim();
+    question =
+        question.trim();
 
 
     if (!question) {
+
         return;
+
     }
 
 
     // Show user's question
-    addMessage("user", question);
+    addMessage(
+        "user",
+        question
+    );
 
 
-    // Show loading message
-    const loadingMessage =
-        addMessage("ai", "Thinking...");
+    // Show loading
+    const loading =
+        addMessage(
+            "ai",
+            "Thinking..."
+        );
 
 
     // Disable input
-    promptBox.disabled = true;
+    promptBox.disabled =
+        true;
 
 
-    const sendButton =
-        form.querySelector("button");
+    const button =
+        form.querySelector(
+            "button"
+        );
 
 
-    if (sendButton) {
+    if (button) {
 
-        sendButton.disabled = true;
+        button.disabled =
+            true;
 
-        sendButton.textContent =
+        button.textContent =
             "Thinking...";
 
     }
 
 
-    try {
+    // Create unique callback name
+    const callbackName =
+        "geminiCallback_" +
+        Date.now();
 
-        // Send question to Apps Script
-        const response = await fetch(
-            AI_BACKEND_URL,
-            {
-                method: "POST",
 
-                body: JSON.stringify({
-                    prompt: question
-                })
-            }
+    // Create script element
+    const script =
+        document.createElement(
+            "script"
         );
 
 
-        // Read server response
-        const data =
-            await response.json();
+    // Create callback
+    window[callbackName] =
+        function(data) {
 
 
-        console.log(
-            "AI backend response:",
-            data
-        );
-
-
-        // Check response
-        if (!data.success) {
-
-            throw new Error(
-                data.error ||
-                "AI request failed."
+            console.log(
+                "AI response:",
+                data
             );
 
-        }
+
+            if (
+                data &&
+                data.success
+            ) {
+
+                loading
+                    .querySelector("p")
+                    .textContent =
+                    data.answer;
+
+            } else {
+
+                loading
+                    .querySelector("p")
+                    .textContent =
+                    data.error ||
+                    "AI could not answer.";
+
+            }
 
 
-        // Show AI answer
-        loadingMessage
-            .querySelector("p")
-            .textContent =
-            data.answer;
+            // Clean up
+            delete window[
+                callbackName
+            ];
 
 
-    } catch (error) {
+            if (
+                script.parentNode
+            ) {
 
-        console.error(
-            "AI ERROR:",
-            error
+                script.parentNode
+                    .removeChild(
+                        script
+                    );
+
+            }
+
+
+            promptBox.disabled =
+                false;
+
+
+            if (button) {
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Ask Gemini ✦";
+
+            }
+
+
+            promptBox.focus();
+
+        };
+
+
+    // Build request URL
+    const url =
+        AI_BACKEND_URL +
+        "?callback=" +
+        encodeURIComponent(
+            callbackName
+        ) +
+        "&prompt=" +
+        encodeURIComponent(
+            question
         );
 
 
-        loadingMessage
-            .querySelector("p")
-            .textContent =
-            "Sorry, I could not connect to the AI. Please try again.";
-
-    }
+    script.src =
+        url;
 
 
-    // Enable input
-    promptBox.disabled = false;
+    // Error handling
+    script.onerror =
+        function() {
+
+            loading
+                .querySelector("p")
+                .textContent =
+                "Sorry, I could not connect to the AI. Please try again.";
 
 
-    if (sendButton) {
-
-        sendButton.disabled = false;
-
-        sendButton.textContent =
-            "Ask Gemini ✦";
-
-    }
+            delete window[
+                callbackName
+            ];
 
 
-    promptBox.focus();
+            if (
+                script.parentNode
+            ) {
+
+                script.parentNode
+                    .removeChild(
+                        script
+                    );
+
+            }
+
+
+            promptBox.disabled =
+                false;
+
+
+            if (button) {
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "Ask Gemini ✦";
+
+            }
+
+        };
+
+
+    // Send request
+    document.body.appendChild(
+        script
+    );
 
 }
 
@@ -188,7 +301,8 @@ form.addEventListener(
             promptBox.value;
 
 
-        promptBox.value = "";
+        promptBox.value =
+            "";
 
 
         askAI(question);
@@ -198,7 +312,7 @@ form.addEventListener(
 
 
 // ========================================
-// Quick question buttons
+// Quick buttons
 // ========================================
 
 const quickButtons =
@@ -247,6 +361,7 @@ promptBox.addEventListener(
         ) {
 
             event.preventDefault();
+
 
             form.requestSubmit();
 

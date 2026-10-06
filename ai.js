@@ -5,8 +5,6 @@
 
 const AI_BACKEND_URL =
     "https://script.google.com/macros/s/AKfycbzMGnfsllrFvgwILWylB63tBbY4Cr2516Itt58ct-u0kJhUb1XgRC_5puOSNx2wajfB/exec";
-
-
 // ========================================
 // Get HTML elements
 // ========================================

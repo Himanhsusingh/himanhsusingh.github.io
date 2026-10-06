@@ -267,3 +267,35 @@
         transform: scale(0.85);
     }
 }
+/* ABOUT PHOTO - FIXED */
+
+.about-photo-card {
+    min-height: 360px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.about-photo {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 50%;
+
+    border: 7px solid #f5c542;
+
+    box-shadow:
+        0 0 0 4px #071426,
+        0 0 0 7px #f5c542,
+        0 0 25px rgba(245, 197, 66, 0.7),
+        0 0 50px rgba(245, 197, 66, 0.25);
+}
+
+@media (max-width: 600px) {
+    .about-photo {
+        width: 210px;
+        height: 210px;
+    }
+}

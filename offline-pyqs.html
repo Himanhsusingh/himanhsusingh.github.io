@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline PYQs Library Catalogue</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside>
+        <div>
+            <div class="brand">📘 CBSE 10th Hub</div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="papers.html">Official Papers</a>
+                <a href="offline-pyqs.html" class="active">Offline PYQs</a>
+                <a href="quiz.html">Maths Quiz</a>
+                <a href="formulas.html">Formula Sheets</a>
+                <a href="dashboard.html">My Dashboard</a>
+                <a href="counselling.html">Counselling Hub</a>
+            </nav>
+        </div>
+    </aside>
+    <main>
+        <div class="card">
+            <h2>📚 Offline Paper Library</h2>
+            <p>Search and open your extracted PDFs directly. Filenames match your archives perfectly.</p>
+            <input type="text" id="searchBar" placeholder="🔍 Search papers by filename, subject, code or set..." onkeyup="filterTable()">
+            
+            <div class="table-container">
+                <table id="pyqTable">
+                    <thead>
+                        <tr><th>Subject Batch</th><th>PDF Filename</th><th>Action</th></tr>
+                    </thead>
+                    <tbody>
+                        <!-- SCIENCE FILES -->
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>1190-1_31-4-1_Science.pdf</td><td><a href="previous_year_papers/Science/1190-1_31-4-1_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>1190-2_31-4-2_Science.pdf</td><td><a href="previous_year_papers/Science/1190-2_31-4-2_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>1190-3_31-4-3_Science.pdf</td><td><a href="previous_year_papers/Science/1190-3_31-4-3_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>1191-1_31-5-1_Science.pdf</td><td><a href="previous_year_papers/Science/1191-1_31-5-1_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>1191-2_31-5-2_Science.pdf</td><td><a href="previous_year_papers/Science/1191-2_31-5-2_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>1191-3_31-5-3_Science.pdf</td><td><a href="previous_year_papers/Science/1191-3_31-5-3_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31(B)-Science for V.I..pdf</td><td><a href="previous_year_papers/Science/31(B)-Science for V.I..pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31-2-1.pdf</td><td><a href="previous_year_papers/Science/31-2-1.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31-2-2.pdf</td><td><a href="previous_year_papers/Science/31-2-2.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31-2-3.pdf</td><td><a href="previous_year_papers/Science/31-2-3.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31-3-1.pdf</td><td><a href="previous_year_papers/Science/31-3-1.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31-3-2.pdf</td><td><a href="previous_year_papers/Science/31-3-2.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31-3-3.pdf</td><td><a href="previous_year_papers/Science/31-3-3.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31_1_1_Science.pdf</td><td><a href="previous_year_papers/Science/31_1_1_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31_1_2_Science.pdf</td><td><a href="previous_year_papers/Science/31_1_2_Science.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-sci">Science</span></td><td>31_1_3_Science.pdf</td><td><a href="previous_year_papers/Science/31_1_3_Science.pdf" class="btn">Open PDF</a></td></tr>
+
+                        <!-- MATHEMATICS STANDARD & BASIC -->
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>1171-1_30-4-1 (Mathematics Standard).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1171-1_30-4-1 (Mathematics Standard).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>1171-2_30-4-2 (Mathematics Standard).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1171-2_30-4-2 (Mathematics Standard).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>1171-3_30-4-3 (Mathematics Standard).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1171-3_30-4-3 (Mathematics Standard).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>1172-1_30-5-1 (Mathematics Standard).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1172-1_30-5-1 (Mathematics Standard).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>1172-2_30-5-2 (Mathematics Standard).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1172-2_30-5-2 (Mathematics Standard).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>1172-3_30-5-3 (Mathematics Standard).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1172-3_30-5-3 (Mathematics Standard).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30-1-1P-Maths (Std)_X.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30-1-1P-Maths (Std)_X.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30-1-2P-Maths (Std)_X.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30-1-2P-Maths (Std)_X.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30-1-3P-Maths (Std)_X.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30-1-3P-Maths (Std)_X.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30_2_1_Mathematics Std._cl.10.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30_2_1_Mathematics Std._cl.10.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30_2_2_Mathematics Std._cl.10.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30_2_2_Mathematics Std._cl.10.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30_2_3_Mathematics Std._cl.10.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30_2_3_Mathematics Std._cl.10.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30_3_1_Mathematics Std._cl.10.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30_3_1_Mathematics Std._cl.10.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30_3_2_Mathematics Std._cl.10.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30_3_2_Mathematics Std._cl.10.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>30_3_3_Mathematics Std._cl.10.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/30_3_3_Mathematics Std._cl.10.pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Standard</span></td><td>1164_30(B)_Mathematics Standard.pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1164_30(B)_Mathematics Standard.pdf" class="btn">Open PDF</a></td></tr>
+                        
+                        <tr><td><span class="badge badge-math">Maths Basic</span></td><td>1158-1_430-4-1 Mathematics (Basic).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1158-1_430-4-1 Mathematics (Basic).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Basic</span></td><td>1158-2_430-4-2 Mathematics (Basic).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1158-2_430-4-2 Mathematics (Basic).pdf" class="btn">Open PDF</a></td></tr>
+                        <tr><td><span class="badge badge-math">Maths Basic</span></td><td>1158-3_430-4-3 Mathematics (Basic).pdf</td><td><a href="previous_year_papers/Mathematics_Standard/1158-3_430-4-3 Mathematics (Basic).pdf" class="btn">Open PDF</a></td></tr>

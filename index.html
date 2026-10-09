@@ -4,56 +4,332 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBSE Class 10 Study Hub - Home</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <aside>
-        <div>
-            <div class="brand">📘 CBSE 10th Hub</div>
-            <nav class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="papers.html">Official Papers</a>
-                <a href="offline-pyqs.html">Offline PYQs</a>
-                <a href="quiz.html">Maths Quiz</a>
-                <a href="formulas.html">Formula Sheets</a>
-                <a href="dashboard.html">My Dashboard</a>
-                <a href="counselling.html">Counselling Hub</a>
-            </nav>
-        </div>
-    </aside>
-    <main>
-        <div class="card" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); color: white;">
-            <h1 style="color: white; margin-bottom: 0.5rem;">Your Complete CBSE Class 10 Study Hub</h1>
-            <p style="color: #e2e8f0; font-size: 1.1rem;">A high-performance workspace engineered for local, reliable CBSE preparation sessions.</p>
-            <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
-                <a href="quiz.html" class="btn" style="background: var(--accent);">Start Practice Quiz →</a>
-                <a href="offline-pyqs.html" class="btn btn-sec" style="background: white; color: var(--primary);">Explore Offline Library</a>
-            </div>
-        </div>
+    <!-- Premium Fonts & Icons -->
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --primary-light: #2563eb;
+            --primary-dark: #172554;
+            --accent: #10b981;
+            --accent-hover: #059669;
+            --secondary: #0f172a;
+            --secondary-light: #1e293b;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --glow: rgba(37, 99, 235, 0.15);
+            --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        }
 
-        <div class="grid-3">
-            <div class="card">
-                <h3>⚡ Offline Access Included</h3>
-                <p>No internet connections required to browse your extracted papers locally.</p>
-            </div>
-            <div class="card">
-                <h3>🎮 Dynamic Analytics</h3>
-                <p>Automatic background performance analysis using secure device isolation storage.</p>
-            </div>
-            <div class="card">
-                <h3>🧩 Interactive Puzzle Corner</h3>
-                <div style="background: #f1f5f9; padding: 1rem; border-radius: 0.5rem; margin-top: 0.5rem; border-left: 4px solid var(--primary);">
-                    <small><b>Daily Challenge:</b></small><br>
-                    <small>The HCF of two positive integers is 6 and their LCM is 180. If one number is 30, what is the other number?</small>
-                    <button class="btn" style="padding: 0.25rem 0.5rem; font-size: 0.8rem; margin-top: 0.5rem; width: 100%;" onclick="alert('Solution: Product = HCF × LCM => 30 × X = 6 × 180 => X = 36!')">Verify Answer</button>
-                </div>
-            </div>
-        </div>
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: var(--font); 
+            -webkit-font-smoothing: antialiased;
+        }
 
-        <footer>
-            <p><strong>CBSE 10th Hub · Session 2026–27</strong></p>
-            <p>Independent Platform Managed by: <strong>Himanshu Kumar Singh</strong> — PM Shri School, JNV</p>
-        </footer>
-    </main>
-</body>
-</html>
+        body { 
+            background-color: var(--bg); 
+            color: var(--text); 
+            display: flex; 
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Responsive Premium Layout Structure */
+        aside { 
+            width: 280px; 
+            background-color: var(--secondary); 
+            color: white; 
+            padding: 2rem 1.5rem; 
+            position: fixed; 
+            height: 100vh; 
+            overflow-y: auto; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-right: 1px solid var(--secondary-light);
+            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.05);
+            z-index: 100;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .brand-logo {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            font-size: 1.25rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px var(--glow);
+        }
+
+        .brand-text { 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            letter-spacing: -0.025em;
+            color: #ffffff; 
+        }
+
+        .nav-links { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 0.5rem; 
+        }
+
+        .nav-links a { 
+            color: #94a3b8; 
+            text-decoration: none; 
+            padding: 0.85rem 1.2rem; 
+            border-radius: 0.85rem; 
+            font-weight: 600; 
+            font-size: 0.95rem; 
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-links a:hover { 
+            color: #ffffff; 
+            background-color: var(--secondary-light);
+            transform: translateX(4px);
+        }
+
+        .nav-links a.active { 
+            color: white; 
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        /* Main View Container */
+        main { 
+            margin-left: 280px; 
+            flex-grow: 1; 
+            padding: 3rem; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 2.5rem; 
+            width: calc(100% - 280px); 
+            max-width: 1400px;
+        }
+
+        /* Top Announcement Header Row */
+        .top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .welcome-meta h2 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--secondary);
+        }
+
+        .welcome-meta p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .live-badge {
+            background-color: #f1f5f9;
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Premium Hero Dashboard Banner */
+        .hero-banner { 
+            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #3b82f6 100%); 
+            color: white; 
+            border-radius: 1.5rem; 
+            padding: 3.5rem; 
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+        }
+
+        .hero-banner::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-banner h1 { 
+            color: white; 
+            font-size: 3rem; 
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1.15;
+            margin-bottom: 0.75rem; 
+        }
+
+        .hero-banner p { 
+            color: #e2e8f0; 
+            font-size: 1.2rem; 
+            max-width: 650px;
+            line-height: 1.6;
+            font-weight: 500;
+            margin-bottom: 2rem;
+        }
+
+        .btn-group { 
+            display: flex; 
+            gap: 1rem; 
+            flex-wrap: wrap; 
+        }
+
+        .btn { 
+            background-color: var(--accent); 
+            color: white; 
+            border: none; 
+            padding: 0.85rem 1.75rem; 
+            border-radius: 1rem; 
+            cursor: pointer; 
+            text-decoration: none; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem;
+            font-weight: 700; 
+            font-size: 1rem; 
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+            transition: all 0.25s ease; 
+        }
+
+        .btn:hover { 
+            background-color: var(--accent-hover); 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-sec { 
+            background-color: rgba(255, 255, 255, 0.15); 
+            color: white;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: none;
+        }
+
+        .btn-sec:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Feature Cards Grid Layout */
+        .grid-3 { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 2rem; 
+        }
+
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 1.25rem; 
+            padding: 2.25rem; 
+            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02), 0 10px 15px -3px rgba(15, 23, 42, 0.03); 
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.06), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+            border-color: #cbd5e1;
+        }
+
+        .icon-wrapper {
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: #eff6ff;
+            color: var(--primary-light);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 { 
+            color: var(--secondary); 
+            font-size: 1.35rem; 
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem; 
+        }
+
+        .card p { 
+            color: var(--text-light); 
+            line-height: 1.6; 
+            font-size: 0.975rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        /* Puzzle Interface Components */
+        .puzzle-box {
+            background-color: #f8fafc; 
+            border: 1px solid var(--border);
+            padding: 1.5rem; 
+            border-radius: 1rem; 
+            margin-top: 1.25rem; 
+            border-left: 5px solid var(--primary-light);
+        }
+
+        .puzzle-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;

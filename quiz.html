@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Interactive Quiz Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside>
+        <div>
+            <div class="brand">📘 CBSE 10th Hub</div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="papers.html">Official Papers</a>
+                <a href="offline-pyqs.html">Offline PYQs</a>
+                <a href="quiz.html" class="active">Maths Quiz</a>
+                <a href="formulas.html">Formula Sheets</a>
+                <a href="dashboard.html">My Dashboard</a>
+                <a href="counselling.html">Counselling Hub</a>
+            </nav>
+        </div>
+    </aside>
+    <main>
+        <div class="card" id="setupCard">
+            <h2>🎮 Chapter-Wise Mathematics Practice Engine</h2>
+            <p>Select your topic target. Attempts and stats sync directly to your dashboard.</p>
+            
+            <label for="topicSelect">Select Chapter:</label>
+            <select id="topicSelect">
+                <option value="Real Numbers">Real Numbers</option>
+                <option value="Polynomials">Polynomials</option>
+                <option value="Trigonometry">Trigonometry</option>
+            </select>
+            
+            <button class="btn" style="margin-top: 1rem;" onclick="startQuiz()">Launch Quiz Session</button>
+        </div>
+
+        <div class="card" id="quizCard" style="display:none;">
+            <h2 id="quizTitle">Quiz</h2>
+            <div id="questionContainer" style="margin: 1.5rem 0;"></div>
+            <button class="btn" id="actionBtn" onclick="checkAnswer()">Submit Response</button>
+        </div>
+
+        <script>
+            const questions = {
+                "Real Numbers": [
+                    {q: "If two positive integers a and b are written as a = x³y² and b = xy³, where x, y are prime numbers, then HCF(a, b) is:", o: ["xy", "xy²", "x³y³", "x²y²"], a: 1},
+                    {q: "The decimal expansion of the rational number 14587/1250 will terminate after how many decimal places?", o: ["One", "Two", "Three", "Four"], a: 3}
+                ],
+                "Polynomials": [
+                    {q: "If one zero of the quadratic polynomial sum x² + 3x + k is 2, then the value of k is:", o: ["10", "-10", "-7", "-2"], a: 1}
+                ],
+                "Trigonometry": [
+                    {q: "If sin θ + cos θ = √2 cos θ, then the value of tan θ is:", o: ["√2 - 1", "√2 + 1", "1/√2", "√3"], a: 0}
+                ]
+            };
+
+            let currentTopic = "";
+            let currentIndex = 0;
+            let score = 0;
+
+            function startQuiz() {
+                currentTopic = document.getElementById("topicSelect").value;
+                currentIndex = 0;
+                score = 0;
+                document.getElementById("setupCard").style.display = "none";
+                document.getElementById("quizCard").style.display = "block";
+                showQuestion();
+            }
+
+            function showQuestion() {
+                const qData = questions[currentTopic][currentIndex];
+                document.getElementById("quizTitle").innerText = `${currentTopic} - Question ${currentIndex + 1}/${questions[currentTopic].length}`;
+                
+                let html = `<p style="font-size:1.1rem; color:var(--secondary); font-weight:500;">${qData.q}</p>`;
+                qData.o.forEach((opt, idx) => {
+                    html += `<label style="display:block; margin: 0.5rem 0; padding:0.5rem; background:#f8fafc; border:1px solid var(--border); border-radius:0.25rem; cursor:pointer;">
+                        <input type="radio" name="option" value="${idx}" style="width:auto; margin-right:0.5rem;"> ${opt}
+                    </label>`;
+                });
+                document.getElementById("questionContainer").innerHTML = html;
+                document.getElementById("actionBtn").innerText = "Submit Response";
+                document.getElementById("actionBtn").onclick = checkAnswer;
+            }
+
+            function checkAnswer() {
+                const selected = document.querySelector('input[name="option"]:checked');
+                if(!selected) return alert("Please select an answer choice!");
+                
+                const qData = questions[currentTopic][currentIndex];
+                if(parseInt(selected.value) === qData.a) { score++; }
+                
+                currentIndex++;
+                if(currentIndex < questions[currentTopic].length) {
+                    showQuestion();
+                } else {
+                    saveResults();
+                }
+            }
+
+            function saveResults() {
+                let attempts = parseInt(localStorage.getItem('quizAttempts') || "0") + 1;
+                localStorage.setItem('quizAttempts', attempts);
+                
+                document.getElementById("questionContainer").innerHTML = `<h3>Quiz Complete!</h3><p>You scored ${score} out of ${questions[currentTopic].length}.</p>`;
+                document.getElementById("actionBtn").innerText = "Return to Setup";
+                document.getElementById("actionBtn").onclick = () => {
+                    document.getElementById("setupCard").style.display = "block";
+                    document.getElementById("quizCard").style.display = "none";
+                };
+            }
+        </script>
+    </main>
+</body>
+</html>

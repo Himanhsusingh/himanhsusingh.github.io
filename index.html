@@ -4,339 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBSE Class 10 Study Hub - Home</title>
-    <!-- Premium Fonts -->
+    <!-- External Google Fonts -->
     <link rel="preconnect" href="https://googleapis.com">
     <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1e3a8a;
-            --primary-light: #2563eb;
-            --primary-dark: #172554;
-            --accent: #10b981;
-            --accent-hover: #059669;
-            --secondary: #0f172a;
-            --secondary-light: #1e293b;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #0f172a;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-            --glow: rgba(37, 99, 235, 0.15);
-            --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        }
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Cache-Breaker linked directly to your existing style.css -->
+    <link rel="stylesheet" href="style.css?v=2.0">
+</head>
+<body>
+    <aside>
+        <div>
+            <div class="brand-container">
+                <div class="brand-logo" style="background: linear-gradient(135deg, #2563eb, #1e3a8a); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 1rem; font-size: 1.2rem;">🎓</div>
+                <div class="brand-text" style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 1.5rem;">CBSE 10th Hub</div>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html" class="active">🏠 Home</a>
+                <a href="papers.html">📄 Official Papers</a>
+                <a href="offline-pyqs.html">📚 Offline PYQs</a>
+                <a href="quiz.html">🎮 Maths Quiz</a>
+                <a href="formulas.html">🧮 Formula Sheets</a>
+                <a href="dashboard.html">👤 My Dashboard</a>
+                <a href="counselling.html">🧭 Counselling Hub</a>
+            </nav>
+        </div>
+    </aside>
+    <main>
+        <div class="top-row">
+            <div class="welcome-meta">
+                <h2>Welcome Back!</h2>
+                <p>Track targets, practice papers, and improve concepts smoothly.</p>
+            </div>
+            <div class="live-badge" style="background-color: #e2e8f0; padding: 0.5rem 1rem; border-radius: 2rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; font-weight: 600;">
+                <div class="live-dot" style="width: 8px; height: 8px; background-color: #10b981; border-radius: 50%;"></div>
+                Offline Safe System Ready
+            </div>
+        </div>
 
-        * { 
-            box-sizing: border-box; 
-            margin: 0; 
-            padding: 0; 
-            font-family: var(--font); 
-            -webkit-font-smoothing: antialiased;
-        }
+        <div class="hero-banner">
+            <h1>Your Complete CBSE<br>Class 10 Study Hub</h1>
+            <p>A high-performance interactive space meticulously engineered for local, reliable Class X Board preparation sessions.</p>
+            <div class="btn-group">
+                <a href="quiz.html" class="btn">Start Practice Quiz →</a>
+                <a href="offline-pyqs.html" class="btn btn-sec">Explore Offline Library</a>
+            </div>
+        </div>
 
-        body { 
-            background-color: var(--bg); 
-            color: var(--text); 
-            display: flex; 
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
+        <div class="grid-3">
+            <div class="card">
+                <div class="icon-wrapper">⚡</div>
+                <h3>Offline Access Included</h3>
+                <p>Zero internet tracking or dependencies required. Open, filter, and study your bundled zip archives catalog securely anywhere.</p>
+            </div>
+            <div class="card">
+                <div class="icon-wrapper">📊</div>
+                <h3>Dynamic Analytics</h3>
+                <p>Automatic performance calculation metrics run locally right in the background using direct, secure sandbox device storage isolation.</p>
+            </div>
+            <div class="card">
+                <div class="icon-wrapper">🧩</div>
+                <h3>Puzzle Corner</h3>
+                <div class="puzzle-box">
+                    <div class="puzzle-title">💡 Daily Challenge</div>
+                    <div class="puzzle-text">The HCF of two positive integers is 6 and their LCM is 180. If one number is 30, what is the other number?</div>
+                    <button class="btn-puzzle" onclick="alert('Solution: Product = HCF × LCM => 30 × X = 6 × 180 => X = 36!')">Verify Method & Answer</button>
+                </div>
+            </div>
+        </div>
 
-        /* Sidebar Navigation */
-        aside { 
-            width: 280px; 
-            background-color: var(--secondary); 
-            color: white; 
-            padding: 2rem 1.5rem; 
-            position: fixed; 
-            height: 100vh; 
-            overflow-y: auto; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border-right: 1px solid var(--secondary-light);
-            box-shadow: 4px 0 24px rgba(15, 23, 42, 0.05);
-            z-index: 100;
-        }
-
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 2.5rem;
-            padding: 0 0.5rem;
-        }
-
-        .brand-logo {
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            font-size: 1.25rem;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 12px var(--glow);
-        }
-
-        .brand-text { 
-            font-size: 1.2rem; 
-            font-weight: 800; 
-            letter-spacing: -0.025em;
-            color: #ffffff; 
-        }
-
-        .nav-links { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 0.5rem; 
-        }
-
-        .nav-links a { 
-            color: #94a3b8; 
-            text-decoration: none; 
-            padding: 0.85rem 1.2rem; 
-            border-radius: 0.85rem; 
-            font-weight: 600; 
-            font-size: 0.95rem; 
-            display: flex;
-            align-items: center;
-            gap: 0.85rem;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .nav-links a:hover { 
-            color: #ffffff; 
-            background-color: var(--secondary-light);
-            transform: translateX(4px);
-        }
-
-        .nav-links a.active { 
-            color: white; 
-            background: linear-gradient(135deg, var(--primary-light), var(--primary));
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
-        }
-
-        /* Main Workspace Container */
-        main { 
-            margin-left: 280px; 
-            flex-grow: 1; 
-            padding: 3rem; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 2.5rem; 
-            width: calc(100% - 280px); 
-            max-width: 1400px;
-        }
-
-        .top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .welcome-meta h2 {
-            font-size: 1.75rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: var(--secondary);
-        }
-
-        .welcome-meta p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
-        .live-badge {
-            background-color: #e2e8f0;
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
-            border-radius: 50%;
-            animation: pulse-glow 2s infinite;
-        }
-
-        @keyframes pulse-glow {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
-        }
-
-        /* Hero Banner */
-        .hero-banner { 
-            background: linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 50%, #3b82f6 100%); 
-            color: white; 
-            border-radius: 1.5rem; 
-            padding: 3.5rem; 
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
-        }
-
-        .hero-banner h1 { 
-            color: white; 
-            font-size: 3rem; 
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1.15;
-            margin-bottom: 0.75rem; 
-        }
-
-        .hero-banner p { 
-            color: #e2e8f0; 
-            font-size: 1.2rem; 
-            max-width: 650px;
-            line-height: 1.6;
-            margin-bottom: 2rem;
-        }
-
-        .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
-        
-        .btn { 
-            background-color: var(--accent); 
-            color: white; 
-            border: none; 
-            padding: 0.85rem 1.75rem; 
-            border-radius: 1rem; 
-            cursor: pointer; 
-            text-decoration: none; 
-            display: inline-flex; 
-            align-items: center; 
-            font-weight: 700; 
-            font-size: 1rem; 
-            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-            transition: all 0.25s ease; 
-        }
-
-        .btn:hover { 
-            background-color: var(--accent-hover); 
-            transform: translateY(-2px);
-        }
-
-        .btn-sec { 
-            background-color: rgba(255, 255, 255, 0.15); 
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: none;
-        }
-
-        .btn-sec:hover {
-            background-color: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-        }
-
-        /* Dashboard Cards Grid */
-        .grid-3 { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 2rem; 
-        }
-
-        .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--border); 
-            border-radius: 1.25rem; 
-            padding: 2.25rem; 
-            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02); 
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.06);
-            border-color: #cbd5e1;
-        }
-
-        .icon-wrapper {
-            width: 3.5rem;
-            height: 3.5rem;
-            background-color: #eff6ff;
-            color: var(--primary-light);
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card h3 { 
-            color: var(--secondary); 
-            font-size: 1.35rem; 
-            font-weight: 700;
-            margin-bottom: 0.75rem; 
-        }
-
-        .card p { color: var(--text-light); line-height: 1.6; font-size: 0.975rem; }
-
-        /* Puzzle Interface Elements */
-        .puzzle-box {
-            background-color: #f8fafc; 
-            border: 1px solid var(--border);
-            padding: 1.5rem; 
-            border-radius: 1rem; 
-            margin-top: 1.25rem; 
-            border-left: 5px solid var(--primary-light);
-        }
-
-        .puzzle-title {
-            color: var(--primary-light);
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-
-        .puzzle-text {
-            color: var(--secondary);
-            font-size: 0.95rem;
-            font-weight: 600;
-            margin-bottom: 1.25rem;
-        }
-
-        .btn-puzzle {
-            width: 100%;
-            background-color: white;
-            color: var(--secondary);
-            border: 1px solid var(--border);
-            padding: 0.65rem;
-            font-size: 0.9rem;
-            font-weight: 700;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .btn-puzzle:hover {
-            background-color: var(--secondary);
-            color: white;
-        }
-
-        /* Profile Side Widget */
-        .profile-widget {
-            margin-top: auto;
-            background-color: var(--secondary-light);
-            padding: 1rem;
-            border-radius: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .profile-avatar {
-            width: 2.5rem;
+        <footer>
+            <p><strong>CBSE 10th Hub · Active Session 2026–27</strong></p>
+            <p>Independent Platform Managed by: <strong>Himanshu Kumar Singh</strong> — PM Shri School, JNV</p>
+        </footer>
+    </main>
+</body>
+</html>

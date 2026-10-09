@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile & Tasks Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <aside>
+        <div>
+            <div class="brand">📘 CBSE 10th Hub</div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="papers.html">Official Papers</a>
+                <a href="offline-pyqs.html">Offline PYQs</a>
+                <a href="quiz.html">Maths Quiz</a>
+                <a href="formulas.html">Formula Sheets</a>
+                <a href="dashboard.html" class="active">My Dashboard</a>
+                <a href="counselling.html">Counselling Hub</a>
+            </nav>
+        </div>
+    </aside>
+    <main>
+        <div class="grid-2">
+            <div class="card">
+                <h2>👤 Student Performance Profiles</h2>
+                <p>Metrics remain sandboxed to this specific browser instance.</p>
+                <div style="margin:1rem 0;">
+                    <p><b>Profile Nickname:</b> <span id="nameSpan" style="color:var(--primary); font-weight:bold;">Class 10 Scholar</span></p>
+                    <p><b>Total Quiz Attempts:</b> <span id="attemptSpan" style="color:var(--accent); font-weight:bold;">0</span></p>
+                </div>
+                <input type="text" id="nameInput" placeholder="Enter profile nickname..." style="margin-bottom:0.5rem;">
+                <button class="btn" onclick="updateProfile()">Save Config Profile</button>
+            </div>
+
+            <div class="card">
+                <h2>🗓 Study Task Checklist Planner</h2>
+                <div style="display:flex; gap:0.5rem; margin-bottom:1rem;">
+                    <input type="text" id="todoInput" placeholder="Add a target chapter goal..." style="margin:0;">
+                    <button class="btn" onclick="saveTodo()">Add Task</button>
+                </div>
+                <ul id="todoList"></ul>
+                <button class="btn btn-danger" style="margin-top:1rem; padding:0.4rem; font-size:0.85rem;" onclick="clearTodos()">Clear Checklist</button>
+            </div>
+        </div>
+
+        <script>
+            window.onload = function() {
+                loadProfile();
+                renderTodos();
+            };
+
+            function loadProfile() {
+                document.getElementById("nameSpan").innerText = localStorage.getItem("hubUsername") || "Class 10 Scholar";
+                document.getElementById("attemptSpan").innerText = localStorage.getItem("quizAttempts") || "0";
+            }
+
+            function updateProfile() {
+                const name = document.getElementById("nameInput").value.trim();
+                if(name) {
+                    localStorage.setItem("hubUsername", name);
+                    loadProfile();
+                    document.getElementById("nameInput").value = "";
+                }
+            }
+
+            function saveTodo() {
+                const input = document.getElementById("todoInput");
+                if(!input.value.trim()) return;
+                let items = JSON.parse(localStorage.getItem("hubTodos") || "[]");
+                items.push(input.value.trim());
+                localStorage.setItem("hubTodos", JSON.stringify(items));
+                input.value = "";
+                renderTodos();
+            }
+
+            function renderTodos() {
+                let items = JSON.parse(localStorage.getItem("hubTodos") || "[]");
+                const ul = document.getElementById("todoList");
+                ul.innerHTML = items.length === 0 ? `<li style="color:var(--text-light)">No active checklist items configured.</li>` : "";
+                items.forEach((item, index) => {
+                    ul.innerHTML += `<li style="padding:0.5rem; background:#f8fafc; border:1px solid var(--border); margin:0.25rem 0; border-radius:0.25rem; display:flex; justify-content:between; align-items:center;">
+                        <span>✅ ${item}</span>
+                    </li>`;
+                });
+            }
+
+            function clearTodos() {
+                localStorage.removeItem("hubTodos");
+                renderTodos();
+            }
+        </script>
+    </main>
+</body>
+</html>

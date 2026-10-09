@@ -3,77 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CBSE Class 10 Study Hub - Home</title>
+    <title>CBSE Class 10 Study Hub | Premium Hub Edition</title>
+    <!-- Premium External UI Typography Fonts -->
     <link rel="preconnect" href="https://googleapis.com">
-    <link rel="preconnect" href="https://gstatic.com" crossorigin>
-    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Links to your active global stylesheet with a cache breaker tracking query -->
+    <link rel="stylesheet" href="style.css?v=premium.3.0">
+    <style>
+        /* Extra structural premium UI enhancements to complement your shared style.css layout */
+        .typewriter-text { border-right: 3px solid var(--primary-light); animation: blinkCursor 0.8s step-end infinite; white-space: nowrap; }
+        @keyframes blinkCursor { from, to { border-color: transparent } 50% { border-color: var(--primary-light); } }
+        .tab-content-view { display: none; width: 100%; flex-direction: column; gap: 2rem; animation: viewFadeIn 0.35s ease-in-out; }
+        .tab-content-view.active-tab { display: flex; }
+        @keyframes viewFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .formula-card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .formula-card { background: #f8fafc; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.25rem; border-top: 4px solid var(--primary-light); transition: transform 0.2s; }
+        .formula-card:hover { transform: translateY(-3px); }
+        .element-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(65px, 1fr)); gap: 0.5rem; margin-top: 1rem; }
+        .element-cell { background: #f1f5f9; border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.25rem; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.85rem; font-weight: 700; }
+        .element-cell:hover { background: var(--secondary); color: white; transform: scale(1.05); }
+        .quiz-choice-lbl { display: block; margin: 0.65rem 0; padding: 0.75rem 1rem; background: #f8fafc; border: 1px solid var(--border); border-radius: 0.5rem; cursor: pointer; font-weight: 500; transition: background 0.2s; }
+        .quiz-choice-lbl:hover { background: #eff6ff; border-color: var(--primary-light); }
+        .stat-num { font-size: 2.25rem; font-weight: 800; color: var(--primary); margin-bottom: 0.25rem; }
+    </style>
 </head>
 <body>
+
     <aside>
         <div>
             <div class="brand-container">
-                <div class="brand-logo">🎓</div>
-                <div class="brand-text">CBSE 10th Hub</div>
+                <div class="brand-logo" style="background: linear-gradient(135deg, #2563eb, #1e3a8a); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; margin-bottom: 1rem; font-size: 1.2rem;">🎓</div>
+                <div class="brand-text" style="font-size: 1.2rem; font-weight: 800; color: white; margin-bottom: 1.5rem;">CBSE 10th Hub</div>
             </div>
             <nav class="nav-links">
-                <a href="index.html" class="active">🏠 Home</a>
-                <a href="papers.html">📄 Official Papers</a>
-                <a href="offline-pyqs.html">📚 Offline PYQs</a>
-                <a href="quiz.html"> </a href="quiz.html">🎮 Maths Quiz</a>
-                <a href="formulas.html">🧮 Formula Sheets</a>
-                <a href="dashboard.html">👤 My Dashboard</a>
-                <a href="counselling.html">🧭 Counselling Hub</a>
+                <a href="#homeView" class="tab-btn active" onclick="switchTab('homeView', this)">🏠 Home</a>
+                <a href="#papersView" class="tab-btn" onclick="switchTab('papersView', this)">📄 Official Papers</a>
+                <a href="#offlineView" class="tab-btn" onclick="switchTab('offlineView', this)">📚 Offline PYQs</a>
+                <a href="#quizView" class="tab-btn" onclick="switchTab('quizView', this)">🎮 Shuffling Quiz</a>
+                <a href="#formulaView" class="tab-btn" onclick="switchTab('formulaView', this)">🧮 Formula Core</a>
+                <a href="#dashboardView" class="tab-btn" onclick="switchTab('dashboardView', this)">👤 Analytics Hub</a>
+                <a href="#counsellingView" class="tab-btn" onclick="switchTab('counsellingView', this)">🧭 Counselling</a>
             </nav>
         </div>
+        <div class="profile-widget" style="margin-top:auto; background:#1e293b; padding:0.85rem; border-radius:0.75rem; display:flex; align-items:center; gap:0.5rem;">
+            <div id="sideAvatar" style="width:35px; height:35px; background:linear-gradient(135deg,#3b82f6,#1e3a8a); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700;">S</div>
+            <div style="display:flex; flex-direction:column;"><span id="sideName" style="color:white; font-size:0.85rem; font-weight:700;">Scholar</span><small style="color:#94a3b8; font-size:0.7rem;">Session 2026–27</small></div>
+        </div>
     </aside>
+
     <main>
-        <div class="top-row">
-            <div class="welcome-meta">
-                <h2>Welcome Back!</h2>
-                <p>Track targets, practice papers, and improve concepts smoothly.</p>
+        <!-- 1. HOME VIEW TAB -->
+        <div id="homeView" class="tab-content-view active-tab">
+            <div class="top-row" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+                <div class="welcome-meta">
+                    <h2 style="font-size:1.75rem; font-weight:800; letter-spacing:-0.03em;">Hello, <span id="welcomeUserText" class="typewriter-text">Scholar</span></h2>
+                    <p style="color:var(--text-light); font-size:0.95rem; font-weight:500;">Let's build concepts securely across active session parameters.</p>
+                </div>
+                <div class="live-badge" style="background:#e2e8f0; padding:0.5rem 1rem; border-radius:2rem; font-size:0.85rem; font-weight:700; display:flex; align-items:center; gap:0.5rem;">
+                    <span style="width:8px; height:8px; background:#10b981; border-radius:50%; display:inline-block;"></span>
+                    <span id="liveClockDisplay">Time Tracker Loading...</span>
+                </div>
             </div>
-            <div class="live-badge">
-                <div class="live-dot"></div>
-                Offline Safe System Ready
-            </div>
-        </div>
 
-        <div class="hero-banner">
-            <h1>Your Complete CBSE<br>Class 10 Study Hub</h1>
-            <p>A high-performance interactive space meticulously engineered for local, reliable Class X Board preparation sessions.</p>
-            <div class="btn-group">
-                <a href="quiz.html" class="btn">Start Practice Quiz →</a>
-                <a href="offline-pyqs.html" class="btn btn-sec">Explore Offline Library</a>
+            <div class="hero-banner" style="background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 50%,#3b82f6 100%); color:white; border-radius:1.5rem; padding:3.5rem; position:relative; box-shadow:0 20px 40px rgba(37,99,235,0.15);">
+                <h1 style="color:white; font-size:2.8rem; font-weight:800; margin-bottom:0.75rem; letter-spacing:-0.04em;">CBSE Class X Study Hub</h1>
+                <p style="color:#e2e8f0; font-size:1.15rem; max-width:650px; line-height:1.6; margin-bottom:2rem;">A high-performance premium interface engineered for reliable local revisions, offline testing catalogs, and streamlined data metrics tracking.</p>
+                <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+                    <button class="btn" style="background:var(--accent);" onclick="document.querySelector('[href=\'#quizView\']').click()">Launch Randomizer Quiz</button>
+                    <button class="btn btn-sec" style="background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25);" onclick="document.querySelector('[href=\'#offlineView\']').click()">Browse Local PYQs</button>
+                </div>
             </div>
-        </div>
 
-        <div class="grid-3">
-            <div class="card">
-                <div class="icon-wrapper">⚡</div>
-                <h3>Offline Access Included</h3>
-                <p>Zero internet tracking or dependencies required. Open, filter, and study your bundled zip archives catalog securely anywhere.</p>
-            </div>
-            <div class="card">
-                <div class="icon-wrapper">📊</div>
-                <h3>Dynamic Analytics</h3>
-                <p>Automatic performance calculation metrics run locally right in the background using direct, secure sandbox device storage isolation.</p>
-            </div>
-            <div class="card">
-                <div class="icon-wrapper">🧩</div>
-                <h3>Puzzle Corner</h3>
-                <div class="puzzle-box">
-                    <div class="puzzle-title">💡 Daily Challenge</div>
-                    <div class="puzzle-text">The HCF of two positive integers is 6 and their LCM is 180. If one number is 30, what is the other number?</div>
-                    <button class="btn-puzzle" onclick="alert('Solution: Product = HCF × LCM => 30 × X = 6 × 180 => X = 36!')">Verify Method & Answer</button>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="stat-num counter-animate" data-target="46">0</div>
+                    <h3>Offline PDFs Bundled</h3>
+                    <p>Meticulously mapped past board papers catalog ready for sandboxed study modules without active connection grids.</p>
+                </div>
+                <div class="card">
+                    <div class="stat-num counter-animate" data-target="15">0</div>
+                    <h3>Core Revision Chapters</h3>
+                    <p>Dynamic formula arrays, periodic element tables, and practice engines mapping structural syllabus outcomes.</p>
+                </div>
+                <div class="card">
+                    <h3>🧩 Core Puzzle Corner</h3>
+                    <div style="background:#f8fafc; border:1px solid var(--border); border-left:4px solid var(--primary-light); padding:1rem; border-radius:0.75rem; margin-top:0.5rem;">
+                        <small style="color:var(--primary-light); font-weight:700; text-transform:uppercase;">Board Challenge</small>
+                        <p style="font-size:0.95rem; font-weight:600; margin-bottom:1rem; color:var(--secondary);">The HCF of two positive integers is 6 and their LCM is 180. If one number is 30, what is the other number?</p>
+                        <button class="btn" style="width:100%; padding:0.5rem; font-size:0.85rem;" onclick="alert('Solution Framework:\nFirst × Second = HCF × LCM\n30 × X = 6 × 180 = 1080\nX = 1080 / 30 = 36!\nThe matching integer target is 36.')">Verify Method Details</button>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <footer>
-            <p><strong>CBSE 10th Hub · Active Session 2026–27</strong></p>
-            <p>Independent Platform Managed by: <strong>Himanshu Kumar Singh</strong> — PM Shri School, JNV</p>
-        </footer>
-    </main>
-</body>
-</html>
+        <!-- 2. OFFICIAL PAPERS VIEW TAB -->
+        <div id="papersView" class="tab-content-view">
+            <div class="card">
+                <h2>📚 Official Boards Verification Channels</h2>
+                <p>Cross-check your exam strategies directly through verified resource pipelines provided by standard authorities.</p>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr><th>Target Resource Channel</th><th>Description</th><th>Action</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><b>CBSE Sample Papers 2026–27</b></td><td>Current session model question testing arrays and verified assessment layouts.</td><td><a href="https://cbseacademic.nic.in" target="_blank" class="btn">Open Portal ↗</a></td></tr>
+                            <tr><td><b>CBSE Question Paper Archive</b></td><td>Official live national archive repository containing historical past board exams.</td><td><a href="https://cbse.gov.in" target="_blank" class="btn btn-sec">Open Archive ↗</a></td></tr>
